@@ -115,7 +115,7 @@ const Sidebar = () => {
   return (
     <div
       className={`${
-        isCollapsed ? "w-16" : "w-60"
+        isCollapsed ? "w-20" : "w-60"
       } bg-white text-white flex flex-col rounded-lg h-full overflow-y-auto sidebar transition-all duration-500 ease-in-out`}
     >
       {/* Sidebar top icon */}
