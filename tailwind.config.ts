@@ -10,6 +10,27 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        primary: {
+          1: "#4DC591", // primary-1
+          2: "#6BCFA4", // primary-2
+          3: "#B6E7D2", // primary-3
+          4: "#EDF9F4", // primary-4
+        },
+        // Secondary colors
+        secondary: {
+          1: "#181B20", // secondary-1
+          2: "#3F4246", // secondary-2
+          3: "#B6E7D2", // secondary-3
+          4: "#EDF9F4", // secondary-4
+        },
+        // Other specific colors
+        blue: "#0072F5", // #0072F5
+        green: "#0F9549", // #0F9549
+        red: "#EF4444", // #EF4444
+        orange: "#F5A524", // #F5A524
+        dark: "#16181A", // #16181A
+        gray: "#A3A3A3",
+        light_gray: "#F4F4F4", // #A3A3A3
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -19,14 +40,6 @@ const config: Config = {
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
-        },
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
         },
         muted: {
           DEFAULT: "hsl(var(--muted))",
@@ -51,22 +64,67 @@ const config: Config = {
           "5": "hsl(var(--chart-5))",
         },
       },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+      fontFamily: {
+        jakarta: ["Inter", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
       },
+      height: {
+        "300px": "300px",
+        "500px": "500px",
+        sidebar: "calc(100vh - 32px)",
+      },
+
       container: {
-        center: true, // This centers the container horizontally
-        padding: "1rem", // Adds padding for better responsiveness
+        center: true,
+        padding: "2rem",
+        screens: {
+          sm: "576px",
+          "sm-max": {
+            max: "576px",
+          },
+          md: "768px",
+          "md-max": {
+            max: "768px",
+          },
+          lg: "992px",
+          "lg-max": {
+            max: "992px",
+          },
+          xl: "1200px",
+          "xl-max": {
+            max: "1200px",
+          },
+          "2xl": "1320px",
+          "2xl-max": {
+            max: "1320px",
+          },
+          "3xl": "1600px",
+          "3xl-max": {
+            max: "1600px",
+          },
+          "4xl": "1850px",
+          "4xl-max": {
+            max: "1850px",
+          },
+        },
       },
-      screens: {
-        xsm: "320px",
-        sm: "480px",
-        md: "768px",
-        lg: "1024px",
-        xl: "1280px",
-        "2xl": "1536px",
+      keyframes: {
+        "accordion-down": {
+          from: {
+            height: "0",
+          },
+          to: {
+            height: "var(--radix-accordion-content-height)",
+          },
+        },
+        "accordion-up": {
+          from: {
+            height: "var(--radix-accordion-content-height)",
+          },
+          to: {
+            height: "0",
+          },
+        },
       },
     },
   },
