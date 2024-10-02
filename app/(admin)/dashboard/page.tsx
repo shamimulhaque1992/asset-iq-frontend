@@ -35,7 +35,7 @@ const DashBoard = () => {
     },
   ];
   return (
-    <section className="w-full">
+    <section className="h-screen w-full">
       <div
         className="bannerSection w-full h-40 rounded-lg"
         style={{

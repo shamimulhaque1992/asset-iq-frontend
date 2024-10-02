@@ -1,101 +1,147 @@
+"use client";
+import { useState } from "react";
+import { Button } from "@/components/ui/button"; // Shadcn UI Button component
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu"; // Shadcn UI Dropdown components
+import Link from "next/link";
+import { useUser } from "@clerk/nextjs";
+import { SignOutButton } from "@clerk/nextjs";
+import { TbArrowBadgeRight } from "react-icons/tb";
 import Image from "next/image";
+import { icons } from "@/constants";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export default function Home() {
+  const { isLoaded, isSignedIn, user } = useUser();
+  const [openProductDropdown, setOpenProductDropdown] = useState(false);
+  const [openCompanyDropdown, setOpenCompanyDropdown] = useState(false);
+  const [hovered, setHovered] = useState(false);
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div
+      className="container w-9/12"
+      style={{
+        height: "100vh",
+        backgroundImage: "url(/assets/images/project_cover.png)",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        backgroundSize: "contain",
+      }}
+    >
+      <nav className="flex justify-between items-center py-4 bg-white border-b border-gray">
+        {/* Left Side: Logo and Nav Items */}
+        <div className="flex items-center space-x-6">
+          {/* Logo */}
+          <Link href="/">
+            <Image width={50} height={50} src={icons.Logo} alt="logo"></Image>
+          </Link>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          {/* Nav Items */}
+          <div className="space-x-4">
+            {/* Product Dropdown */}
+            <DropdownMenu
+              open={openProductDropdown}
+              onOpenChange={setOpenProductDropdown}
+            >
+              <DropdownMenuTrigger asChild className="relative">
+                <Button variant="link">Product</Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                className="bg-white absolute left-[-25px]
+              border-none shadow-xl"
+              >
+                <DropdownMenuItem className="">
+                  <Card className="w-[350px] border-none shadow-none">
+                    <CardHeader>
+                      <CardTitle>Create project</CardTitle>
+                      <CardDescription>
+                        Deploy your new project in one-click.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent></CardContent>
+                    <CardFooter className="flex justify-between">
+                      <Button variant="outline">Cancel</Button>
+                      <Button>Deploy</Button>
+                    </CardFooter>
+                  </Card>
+                </DropdownMenuItem>
+                <DropdownMenuItem>Feature 2</DropdownMenuItem>
+                <DropdownMenuItem>Feature 3</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            {/* Docs */}
+            <Link href="/docs">Docs</Link>
+
+            {/* Changelog */}
+            <Link href="/changelog">Changelog</Link>
+
+            {/* Pricing */}
+            <Link href="/pricing">Pricing</Link>
+
+            {/* Company Dropdown */}
+            <DropdownMenu
+              open={openCompanyDropdown}
+              onOpenChange={setOpenCompanyDropdown}
+            >
+              <DropdownMenuTrigger asChild>
+                <Button variant="link">Company</Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem>About Us</DropdownMenuItem>
+                <DropdownMenuItem>Careers</DropdownMenuItem>
+                <DropdownMenuItem>Contact</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        {/* Right Side: Sign In / Dashboard */}
+        <div className="flex items-center space-x-4">
+          {!user ? (
+            <Link href="/sign-in">Sign In</Link>
+          ) : (
+            <>
+              <SignOutButton>
+                <Button className="bg-transparent shadow-none">Sign Out</Button>
+              </SignOutButton>{" "}
+              <Link href="/dashboard">
+                <Button
+                  className="bg-black text-white flex items-center relative overflow-hidden"
+                  onMouseEnter={() => setHovered(true)}
+                  onMouseLeave={() => setHovered(false)}
+                >
+                  Dashboard
+                  <TbArrowBadgeRight
+                    className={`transition-transform duration-300 ease-in-out ${
+                      hovered
+                        ? "translate-x-3 opacity-0"
+                        : "translate-x-1 opacity-100"
+                    }`}
+                  ></TbArrowBadgeRight>
+                  <TbArrowBadgeRight
+                    className={`transition-transform duration-300 ease-in-out ${
+                      hovered
+                        ? "-translate-x-1 opacity-100"
+                        : "-translate-x-3 opacity-0"
+                    }`}
+                  ></TbArrowBadgeRight>
+                </Button>
+              </Link>
+            </>
+          )}
+        </div>
+      </nav>
     </div>
   );
 }
