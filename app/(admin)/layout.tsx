@@ -7,8 +7,8 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="h-screen bg-light_gray">
-      <div className="flex h-screen container p-5">
+    <section className="">
+      <div className="flex container p-5">
         {/* Sidebar */}
         <Sidebar />
 
@@ -17,7 +17,7 @@ export default function DashboardLayout({
           <NavBar />
 
           {/* Main Content Area */}
-          <main className="flex-1 py-5 bg-gray-100">{children}</main>
+          <main className="flex-1 py-5 ">{children}</main>
         </div>
       </div>
     </section>

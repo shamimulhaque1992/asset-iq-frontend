@@ -28,17 +28,8 @@ export default function Home() {
   const [openCompanyDropdown, setOpenCompanyDropdown] = useState(false);
   const [hovered, setHovered] = useState(false);
   return (
-    <div
-      className="container w-9/12"
-      style={{
-        height: "100vh",
-        backgroundImage: "url(/assets/images/project_cover.png)",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-        backgroundSize: "contain",
-      }}
-    >
-      <nav className="flex justify-between items-center py-4 bg-white border-b border-gray">
+    <div className="container w-9/12">
+      <nav className="flex justify-between items-center py-4 ">
         {/* Left Side: Logo and Nav Items */}
         <div className="flex items-center space-x-6">
           {/* Logo */}
@@ -81,16 +72,16 @@ export default function Home() {
             </DropdownMenu>
 
             {/* Docs */}
-            <Link href="/docs">Docs</Link>
-
-            {/* Changelog */}
-            <Link href="/changelog">Changelog</Link>
+            <Link href="/docs">Solution</Link>
 
             {/* Pricing */}
             <Link href="/pricing">Pricing</Link>
 
+            {/* Changelog */}
+            <Link href="/changelog">FAQ</Link>
+
             {/* Company Dropdown */}
-            <DropdownMenu
+            {/* <DropdownMenu
               open={openCompanyDropdown}
               onOpenChange={setOpenCompanyDropdown}
             >
@@ -102,7 +93,7 @@ export default function Home() {
                 <DropdownMenuItem>Careers</DropdownMenuItem>
                 <DropdownMenuItem>Contact</DropdownMenuItem>
               </DropdownMenuContent>
-            </DropdownMenu>
+            </DropdownMenu> */}
           </div>
         </div>
 

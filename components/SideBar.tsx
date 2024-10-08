@@ -162,7 +162,7 @@ const Sidebar = () => {
                     ${
                       isActive
                         ? "text-primary-1 bg-gradient-to-r from-primary-3 to-primary-4 border-l-4 border-primary-1"
-                        : "text-gray hover:bg-gray-700"
+                        : "text-gray_theme hover:bg-gray_theme-700"
                     }${isCollapsed ? "justify-center" : ""}`}
                   onClick={() => hasChildren && toggleMenu(item.title)} // Toggle submenu on click
                 >
@@ -199,7 +199,7 @@ const Sidebar = () => {
                               ${
                                 isSubActive
                                   ? "text-primary-1 bg-gradient-to-r from-primary-3 to-primary-4 border-l-4 border-primary-1"
-                                  : "text-gray hover:bg-gray-700"
+                                  : "text-gray_theme hover:bg-gray_theme-700"
                               }`}
                           >
                             <subItem.icon />

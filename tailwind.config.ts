@@ -24,12 +24,12 @@ const config: Config = {
           4: "#EDF9F4", // secondary-4
         },
         // Other specific colors
-        blue: "#0072F5", // #0072F5
-        green: "#0F9549", // #0F9549
-        red: "#EF4444", // #EF4444
-        orange: "#F5A524", // #F5A524
-        dark: "#16181A", // #16181A
-        gray: "#A3A3A3",
+        blue_theme: "#0072F5", // #0072F5
+        green_theme: "#0F9549", // #0F9549
+        red_theme: "#EF4444", // #EF4444
+        orange_theme: "#F5A524", // #F5A524
+        dark_theme: "#16181A", // #16181A
+        gray_theme: "#A3A3A3",
         light_gray: "#F4F4F4", // #A3A3A3
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
