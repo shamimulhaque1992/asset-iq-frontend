@@ -150,40 +150,42 @@ const Sidebar = () => {
         <ul className="space-y-4 p-4">
           {menuItems.map((item, index) => {
             // Check if the current item is active
-            const isActive = pathname === item.href;
+            const isActive = pathname.includes(item.href);
 
             // Check if this menu has children (nested items)
             const hasChildren = !!item.children;
 
             return (
               <li key={index}>
-                <div
-                  className={`flex items-center justify-between space-x-2 p-2 rounded-md cursor-pointer font-bold
-                    ${
-                      isActive
-                        ? "text-primary-1 bg-gradient-to-r from-primary-3 to-primary-4 border-l-4 border-primary-1"
-                        : "text-gray_theme hover:bg-gray_theme-700"
-                    }${isCollapsed ? "justify-center" : ""}`}
-                  onClick={() => hasChildren && toggleMenu(item.title)} // Toggle submenu on click
+                <Link
+                  href={hasChildren ? "#" : item.href}
+                  className={`flex items-center space-x-2 w-full rounded-md cursor-pointer font-bold ${
+                    isActive
+                      ? "text-primary-1 bg-gradient-to-r from-primary-3 to-primary-4 border-l-4 border-primary-1"
+                      : "text-gray_theme hover:bg-gray_theme-700"
+                  }${
+                    isCollapsed ? "justify-center" : ""
+                  } `}
                 >
-                  <Link
-                    href={hasChildren ? "#" : item.href}
-                    className="flex items-center space-x-2"
+                  <div
+                    className={`flex items-center justify-between space-x-2 p-2 
+                    `}
+                    onClick={() => hasChildren && toggleMenu(item.title)} // Toggle submenu on click
                   >
                     <item.icon />
                     {!isCollapsed && <span>{item.title}</span>}
-                  </Link>
 
-                  {hasChildren && (
-                    <span>
-                      {openMenus.includes(item.title) ? (
-                        <FaChevronDown />
-                      ) : (
-                        <FaChevronRight />
-                      )}
-                    </span>
-                  )}
-                </div>
+                    {hasChildren && (
+                      <span>
+                        {openMenus.includes(item.title) ? (
+                          <FaChevronDown />
+                        ) : (
+                          <FaChevronRight />
+                        )}
+                      </span>
+                    )}
+                  </div>
+                </Link>
 
                 {/* Nested menu (if applicable) */}
                 {hasChildren && openMenus.includes(item.title) && (

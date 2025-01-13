@@ -1058,26 +1058,6 @@ const DashBoard = () => {
 
   return (
     <div>
-      {/* <div className="flex justify-between items-center mb-4">
-        <input
-          type="text"
-          placeholder="Search assets items"
-          className="border rounded-md px-4 py-2"
-        />
-        <div className="flex space-x-2">
-          <button className="border rounded-md px-4 py-2">Export</button>
-          <button className="border rounded-md px-4 py-2">Audit</button>
-          <button className="border rounded-md px-4 py-2">Print</button>
-          <select className="border rounded-md px-4 py-2">
-            <option value="all">All Assets</option>
-            <option value="recent">Recently Added</option>
-          </select>
-          <button className="bg-green-500 text-white rounded-md px-4 py-2">
-            Add Asset
-          </button>
-        </div>
-      </div> */}
-
       <DataTable columns={columns} data={assets} />
     </div>
   );

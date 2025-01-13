@@ -9,14 +9,14 @@ import { SignedIn, UserButton, useUser } from "@clerk/nextjs";
 const Navbar = () => {
   const { isLoaded, isSignedIn, user } = useUser();
   return (
-    <div className="w-full h-16 flex items-center justify-between px-6 shadow-md rounded-md py-4">
+    <div className="w-full h-16 flex items-center justify-between px-6 shadow-md rounded-md py-4 bg-white">
       <div className="relative">
         <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 z-10 text-primary-1" />
         <Input
           type="text"
           id="text"
           placeholder="Search"
-          className="pl-10 pr-3 py-2 text-md w-96 border border-gray rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-[#6E23DD] focus:border-gray-500 placeholder:text-gray" // Add additional styling as needed
+          className="pl-10 pr-3 py-2 text-md w-96 border-2 border-gray rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6E23DD] focus:border-gray-500 placeholder:text-gray" // Add additional styling as needed
         />
       </div>
 

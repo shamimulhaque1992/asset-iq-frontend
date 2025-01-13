@@ -9,3 +9,7 @@ export type Asset = {
   floor: string;
   status: string;
 };
+export type BreadcrumbObject = {
+  name: string;
+  href: string;
+};

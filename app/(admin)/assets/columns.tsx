@@ -83,16 +83,20 @@ export const columns: ColumnDef<Asset>[] = [
               <IoIosMore className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="bg-white border-0 shadow-md">
+          <DropdownMenuContent
+            align="end"
+            className="bg-white border-0 shadow-md"
+          >
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(payment.assetId)}
             >
-              Copy payment ID
+              Copy Asset ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem>View Asset</DropdownMenuItem>
+            <DropdownMenuItem>Edit Asset</DropdownMenuItem>
+            <DropdownMenuItem>Delete Asset</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

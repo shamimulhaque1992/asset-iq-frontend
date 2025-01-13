@@ -20,7 +20,7 @@ const config: Config = {
         secondary: {
           1: "#181B20", // secondary-1
           2: "#3F4246", // secondary-2
-          3: "#B6E7D2", // secondary-3
+          3: "#A0A2A4", // secondary-3
           4: "#EDF9F4", // secondary-4
         },
         // Other specific colors

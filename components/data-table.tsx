@@ -31,6 +31,20 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { generatePageButtons } from "@/helpers/paginationButtons";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
+import { MdKeyboardArrowLeft } from "react-icons/md";
+import { MdKeyboardArrowRight } from "react-icons/md";
+import { MdKeyboardDoubleArrowRight } from "react-icons/md";
+import { TbSquareRoundedPlus } from "react-icons/tb";
+import { FiSearch } from "react-icons/fi";
+import Link from "next/link";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -63,16 +77,20 @@ export function DataTable<TData, TValue>({
   return (
     <div className="">
       <div className="flex flex-col items-center py-4 gap-3">
-        <Input
-          placeholder="Search assets..."
-          value={
-            (table.getColumn("category")?.getFilterValue() as string) ?? ""
-          }
-          onChange={(event) =>
-            table.getColumn("category")?.setFilterValue(event.target.value)
-          }
-          className="border-0 shadow-md "
-        />
+        <div className="relative w-full">
+          <FiSearch className="absolute left-6 top-1/2 transform -translate-y-1/2 text-gray-500 z-10" />
+          <Input
+            placeholder="Search assets..."
+            value={
+              (table.getColumn("category")?.getFilterValue() as string) ?? ""
+            }
+            onChange={(event) =>
+              table.getColumn("category")?.setFilterValue(event.target.value)
+            }
+            className="pl-12 pr-3 text-md w-full border-2 border-gray rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6E23DD] focus:border-gray-500 placeholder:text-gray bg-white py-6"
+          />
+        </div>
+
         <div className="flex justify-between w-full space-x-2">
           <div className="flex justify-between gap-2">
             <Button className="border rounded-md px-4 py-2">Export</Button>
@@ -80,18 +98,25 @@ export function DataTable<TData, TValue>({
             <Button className="border rounded-md px-4 py-2">Print</Button>
           </div>
           <div className="flex justify-between gap-2">
-            <select
-              value={table.getState().pagination.pageSize}
-              onChange={(e) => {
-                table.setPageSize(Number(e.target.value));
+            <Select
+              value={String(table.getState().pagination.pageSize)} // Convert value to string
+              onValueChange={(value) => {
+                table.setPageSize(Number(value)); // Convert selected value back to number
               }}
             >
-              {[10, 20, 30, 40, 50].map((pageSize) => (
-                <option key={pageSize} value={pageSize}>
-                  {pageSize}
-                </option>
-              ))}
-            </select>
+              <SelectTrigger className="w-[80px]">
+                <SelectValue
+                  placeholder={table.getState().pagination.pageSize}
+                />
+              </SelectTrigger>
+              <SelectContent className="bg-white">
+                {[10, 20, 30, 40, 50].map((pageSize) => (
+                  <SelectItem key={pageSize} value={String(pageSize)}>
+                    {pageSize}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="border rounded-md px-4 py-2">
@@ -102,7 +127,7 @@ export function DataTable<TData, TValue>({
                 align="end"
                 className="bg-white border-0 shadow-md"
               >
-                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                <DropdownMenuLabel>All Assets</DropdownMenuLabel>
                 <DropdownMenuItem
                 // onClick={() => navigator.clipboard.writeText(payment.assetId)}
                 >
@@ -113,9 +138,12 @@ export function DataTable<TData, TValue>({
                 <DropdownMenuItem>View payment details</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <Button className="bg-green-500 text-white rounded-md px-4 py-2">
-              Add Asset
-            </Button>
+            <Link href={"/assets/add-asset"}>
+              <Button className="bg-primary-1 text-white rounded-md w-[100px] px-2 py-2 flex justify-around items-center">
+                <TbSquareRoundedPlus></TbSquareRoundedPlus>
+                <span>Add Asset</span>
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
@@ -175,14 +203,14 @@ export function DataTable<TData, TValue>({
           onClick={() => table.setPageIndex(0)}
           disabled={!table.getCanPreviousPage()}
         >
-          {"<<"}
+          <MdKeyboardDoubleArrowLeft />
         </Button>
 
         <Button
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
-          {"<"}
+          <MdKeyboardArrowLeft />
         </Button>
 
         {/* Page Number Buttons with Ellipsis */}
@@ -192,7 +220,11 @@ export function DataTable<TData, TValue>({
               key={idx}
               size="sm"
               onClick={() => table.setPageIndex(page)}
-              variant={currentPage === page ? "secondary" : "default"}
+              className={`${
+                currentPage === page
+                  ? "bg-primary-1 text-white"
+                  : "bg-secondary-3"
+              } `}
             >
               {page + 1}
             </Button>
@@ -207,23 +239,15 @@ export function DataTable<TData, TValue>({
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
-          {">"}
+          <MdKeyboardArrowRight />
         </Button>
 
         <Button
           onClick={() => table.setPageIndex(pageCount - 1)}
           disabled={!table.getCanNextPage()}
         >
-          {">>"}
+          <MdKeyboardDoubleArrowRight />
         </Button>
-
-        {/* Previous/Next Page Window Buttons */}
-        {/* {pageWindowStart > 0 && (
-          <Button onClick={handlePreviousPageWindow}>{"< Prev"}</Button>
-        )}
-        {pageWindowStart + pageWindowSize < totalPageCount && (
-          <Button onClick={handleNextPageWindow}>{"Next >"}</Button>
-        )} */}
       </div>
     </div>
   );
